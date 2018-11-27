@@ -1,0 +1,8 @@
+name=str(input("Enter your name:"))
+writefile=open("PracC.txt","w")
+writefile.write(name)
+writefile.close()
+readfile = open("PracC.txt", "r")
+name = readfile.read().strip()
+print("Your name is", name)
+readfile.close()
