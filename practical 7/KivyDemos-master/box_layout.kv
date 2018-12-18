@@ -1,0 +1,25 @@
+BoxLayout:
+    orientation : "vertical"
+    Button:
+        text:"Clear"
+        font_size:30
+        id: clear
+        on_press:app.clear()
+    TextInput:
+        id: text_input
+        on_text_validate:app.text_input()
+
+
+
+
+    Button:
+        text:"Greet"
+        font_size:30
+        id : button_press
+        on_press: app.pressed()
+
+    Label:
+        text:"Enter Your Name"
+        font_size:30
+        color:(1,1,0,1)
+        id:label_display
