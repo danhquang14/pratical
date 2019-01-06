@@ -1,0 +1,96 @@
+BoxLayout:
+    # this layout has an id so we can check if it is the parent of the popup - below
+    id: main_box
+    Popup:
+        id: popup
+        # uncomment the line below for a popup that's not full screen/window
+        size_hint: (.7, .7)
+        title: "Add Song Entry"
+        on_parent:
+            # Make popup disappear immediately
+            if self.parent == main_box: self.parent.remove_widget(self)
+        BoxLayout:
+            # layout for input fields and action buttons
+            id: inputs
+            orientation: 'vertical'
+            Label:
+                text: 'Name: '
+                size_hint_y: None
+                height: '48dp'
+            TextInput:
+                id: added_name
+                value: ''
+                size_hint_y: None
+                height: '48dp'
+                # the next two lines make it so that pressing Tab moves the cursor
+                # to the next input field instead of entering the Tab character
+                multiline: False
+                write_tab: False
+            Label:
+                text:'Artist'
+                size_hint_y :None
+                height:'48dp'
+            TextInput:
+                id: added_artist
+                value:''
+                size_hint_y:None
+                height:'48dp'
+                multiline: False
+                write_tab: False
+            Label:
+                text: 'Year '
+                size_hint_y: None
+                height: '48dp'
+            TextInput:
+                id: added_number
+                value: ''
+                size_hint_y: None
+                height: '48dp'
+                multiline: False
+                write_tab: False
+            Button:
+                text: 'Save Entry'
+                on_release: app.press_save(added_name.text, added_number.text,added_artist.text)
+            Button:
+                text: 'Cancel'
+                on_release: app.press_cancel()
+            Label:
+                # this is a different Label than the main GUI screen,
+                # but uses the same string data
+                text: app.status_text
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            orientation: 'horizontal'
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_x: 0.3
+                Label:
+                    size_hint_y:0.3
+                    text:'Sort by:'
+                    color: 1,1,0,1
+                Spinner:
+                    id: list_sort
+                    text: app.current_song
+                    values: app.song_codes
+                    on_text:app.press_sort_button(self.text)
+                Button:
+                    text: 'Add New Song'
+                    on_release: app.press_add()
+                Button:
+                    text: 'Clear'
+                    on_release: app.press_clear()
+
+            BoxLayout:
+                orientation: "vertical"
+                Label:
+                    size_hint_y: 0.11
+                    text: app.status_text1
+                BoxLayout:
+                    id: entries_box
+                    cols: 1
+                    orientation: 'vertical'
+                Label:
+                    size_hint_y: 0.1
+                    text: app.status_text2
+                    color:1,1,0,1
